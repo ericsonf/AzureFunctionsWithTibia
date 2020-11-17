@@ -10,7 +10,6 @@ jobs:
   build:
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      PROJECT_PATH: ''
       FUNCTION_APP: app-amtechconf
     
     runs-on: ubuntu-latest
@@ -22,10 +21,10 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Build
-      run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release
+      run: dotnet build --configuration Release
     
     - name: Publish
-      run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o app
+      run: dotnet publish -c Release -o app
     
     - name: Azure Login - Conectando com Credenciais no Azure
       uses: Azure/login@v1
