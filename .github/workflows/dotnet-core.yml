@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       PROJECT_PATH: ''
       FUNCTION_APP: app-amtechconf
     
