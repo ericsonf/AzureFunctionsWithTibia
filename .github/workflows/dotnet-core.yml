@@ -34,5 +34,5 @@ jobs:
     - name: Deployment da Function App
       uses: Azure/functions-action@v1.1.4
       with:
-        app-name: ${{ secrets.FUNCTION_APP }}
+        app-name: app-amtechconf
         package: './app'
