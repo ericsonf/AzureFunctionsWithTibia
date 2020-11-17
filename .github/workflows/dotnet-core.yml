@@ -8,7 +8,10 @@ on:
 
 jobs:
   build:
-
+    env:
+      PROJECT_PATH:  ./AzureFunctionsWithTibia
+      FUNCTION_APP:  app-amtechconf
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -17,37 +20,19 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Build
+      run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release
     
     - name: Publish
-      run: dotnet publish -c Release -o app
+      run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o app
     
-    - name: Package functions
-      uses: actions/upload-artifact@v1
+    - name: Azure Login - Conectando com Credenciais no Azure
+      uses: Azure/login@v1
       with:
-        name: functions
-        path: './app'
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build]
-    env:
-      FUNC_APP_NAME: app-amtechconf
-    steps:
-      - name: Download website
-        uses: actions/download-artifact@v1
-        with:
-          name: functions
-          path: ${{ env.OUTPUT_PATH }}
-
-      - name: Login no Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deployment da Function App
-        uses: Azure/functions-action@v1.1.4
-        with:
-          app-name: ${{ env.FUNC_APP_NAME }}
-          package: './app'
+    - name: Azure Functions - Deployment da Function App
+      uses: Azure/functions-action@v1.1.4
+      with:
+        app-name: ${{ env.FUNCTION_APP }}
+        package: './app'
