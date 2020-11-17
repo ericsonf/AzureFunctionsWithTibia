@@ -9,8 +9,8 @@ on:
 jobs:
   build:
     env:
-      PROJECT_PATH:  ./AzureFunctionsWithTibia
-      FUNCTION_APP:  app-amtechconf
+      PROJECT_PATH: ./AzureFunctionsWithTibia
+      FUNCTION_APP: app-amtechconf
     
     runs-on: ubuntu-latest
 
