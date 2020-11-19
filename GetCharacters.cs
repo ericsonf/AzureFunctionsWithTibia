@@ -17,7 +17,7 @@ namespace AzureFunctionsWithTibia
         {
             log.LogInformation("Getting a Tibia Character Information");
             
-            var characterName = req.Query["name"];
+            var characterName = req.Query["nome"];
             var client = new HttpClient();
             var response = await client.GetAsync($"https://api.tibiadata.com/v2/characters/{characterName}.json");
             var content = await response.Content.ReadAsStringAsync();
