@@ -15,7 +15,7 @@ namespace AzureFunctionsWithTibia
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("Getting a Tibia Character Information");
+            log.LogInformation("Getting a Tibia Character Information!");
             
             var characterName = req.Query["name"];
             var client = new HttpClient();
