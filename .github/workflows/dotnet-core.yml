@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     env:
-      FUNCTION_APP: app-amtechconf
+      FUNCTION_APP: func-aztibia
     
     runs-on: ubuntu-latest
 
